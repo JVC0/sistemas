@@ -4,7 +4,7 @@
 # Nombre: ej6.sh.sh
  #Autor: Joseph Vanegas <josephvanegas48@Gmail.com>
 #
-# Objetivo dias horas minutos en segundos
+# Objetivo segundos a dias, horas y minutos
 # Entrada: Valores para cambiar
 # Salida: valor cambiado
 #
