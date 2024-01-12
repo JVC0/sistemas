@@ -1,10 +1,10 @@
 #!/bin/bash
 #####################################################
 #
-# Nombre: Sripts.sh
+# Nombre: ej05.sh
 # Autor: Joseph Vanegas <josephvanegas48@Gmail.com
 #
-# Objetivo cambiar de Farth a celsious
+# Objetivo dias horas minutos en segundos
 # Entrada: Valores para cambiar
 # Salida: valor cambiado
 #
@@ -15,5 +15,5 @@ dias=$1
 horas=$2
 minutos=$3
 segundos=$4
-resultado=$(echo "scale=3; ($dias*86400)+($horas*3600)+($minutos*60)+$segundos"| bc)
-echo "$dias días, $horas horas, $minutos minutos y $segundos segundos son $resultado segundos"
+    resultado=$("($dias*86400)+($horas*3600)+($minutos*60)+$segundos") 
+    echo "$dias días, $horas horas, $minutos minutos y $segundos segundos son $resultado segundos"
