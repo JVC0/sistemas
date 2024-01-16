@@ -15,7 +15,7 @@
 gradosC=$1
 indec=$2
 echo "Has indicado $# argumentos" #numero de argumentos
-echo "Los agumenmtos que has indicado son:$@" #texto
+echo "Los agumenmtos que has indicado son:$@" #texto puesto
 echo "Los agumenmtos que has indicado son:$*" #array
 echo "estoy en la linea $LINENO,llevo ejecuntado $SECONDS y fui ejecutado por el usuario $USER"
 
