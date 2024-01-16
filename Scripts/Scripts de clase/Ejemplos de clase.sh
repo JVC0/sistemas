@@ -76,4 +76,8 @@ then
 fi
 
 
+echo $? #para mirar el ultimo error
+ #./ej02.sh  << GAMBSINO
+
+#./ej02.sh  <<< GAMBSINO #SOLO un dato
 #read-p

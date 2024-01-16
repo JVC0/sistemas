@@ -12,11 +12,10 @@
 #   2023-01-08: version 1
 ######################################################
 
-nombre=$1
-appellido=$2
-usuario=$3
-
+read -p "Indique su nombre: " nombre
+read -p "Indique su apellido: " apellido
+read -p "Indique su usuario: " usuario
 echo "Bienvenido, $nombre"
 echo "Tu datos son $nombre, $apellido"
 echo "Vamos a crear tu usuaria:$usuario"
-echo "Tu nueva ID es $RAMDOM"
+echo "Tu nueva ID es $RANDOM"
