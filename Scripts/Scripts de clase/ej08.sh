@@ -1,15 +1,15 @@
 #!/bin/bash
 #####################################################
 #
-# Nombre: Sripts.sh
+# Nombre: ej08.sh
 # Autor: Joseph Vanegas <josephvanegas48@Gmail.com
 #
-# Objetivo cambiar de Farth a celsious
-# Entrada: Valores para cambiar
-# Salida: valor cambiado
+# Objetivo: Calcular el IMC
+# Entrada: KG y altura en centimetro
+# Salida: Si estas ob
 #
 # Historial:
-#   2023-12-19: version 1
+#   2023-01-16: version 1
 ######################################################
 read -p "Indique su peso en Kg: " peso
 read -p "Indique su altura en Centimetros: " altura
