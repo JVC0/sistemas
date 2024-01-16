@@ -14,29 +14,23 @@
 read -p "Indique su peso en Kg: " peso
 read -p "Indique su altura en Centimetros: " altura
 IMC=$(echo "scale=2; 10000*$peso/($altura*$altura)" |bc)
-if [ $IMC -lt 16 ] 
-then 
+if (( $(echo "$IMC < 16" | bc) )); then
     echo "Delgadez severa"
-elif [ $(echo "scale=2; $IMC -gt 15.99"|bc) ] && [ $IMC -lt 17 ]
-then
+elif (( $(echo "$IMC > 15.99" | bc) )) && (( $(echo "$IMC < 17" | bc) )); then
     echo "Delgadez moderada"
-elif [ $(echo "scale=2; $IMC -gt 16.99"|bc) ] && [ $(echo "scale=2; $IMC -lt 18.5"|bc) ]
-then
+elif (( $(echo "$IMC > 16.99" | bc) )) && (( $(echo "$IMC < 18.5" | bc) )); then
     echo "Delgadez leve"
-elif [ $(echo "scale=2;$IMC -gt 18.49"|bc) ] && [ $IMC -lt 25 ]
-then
+elif (( $(echo "$IMC > 18.49" | bc) )) && (( $(echo "$IMC < 25" | bc) )); then
     echo "Normal"
-elif [ $(echo "scale=2;$IMC -gt 24.99"|bc) ] && [ $IMC -lt 30 ]
-then
+elif (( $(echo "$IMC > 24.99" | bc) )) && (( $(echo "$IMC < 30" | bc) )); then
     echo "Preobesidad"
-elif [ $(echo "scale=2;$IMC -gt 29.99"|bc) ] && [ $IMC -lt 35 ]
-then
-    echo "Obesidad leve"   
-elif [ $(echo "scale=2;$IMC -gt 1.99"|bc) ] && [ $IMC -lt 40 ]
-then
+elif (( $(echo "$IMC > 29.99" | bc) )) && (( $(echo "$IMC < 35" | bc) )); then
+    echo "Obesidad leve"
+elif (( $(echo "$IMC > 1.99" | bc) )) && (( $(echo "$IMC < 40" | bc) )); then
     echo "Obesidad media"
-elif [ $(echo "scale=2;$IMC -gt 39.99"|bc) ]
-then
+elif (( $(echo "$IMC > 39.99" | bc) )); then
     echo "Obesidad morbida"
 fi
 
+#la estructura (()) es mas abieta
+#-gt esta echo para numeros enteros
