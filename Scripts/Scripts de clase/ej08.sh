@@ -13,7 +13,7 @@
 ######################################################
 read -p "Indique su peso en Kg: " peso
 read -p "Indique su altura en Centimetros: " altura
-IMC=$(echo "scale=2; 10000*$peso/$altura" |bc)
+IMC=$(echo "scale=2; 10000*$peso/($altura*$altura)" |bc)
 if [ $IMC -lt 16 ] 
 then 
     echo "Delgadez severa"
