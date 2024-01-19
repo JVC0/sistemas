@@ -43,4 +43,22 @@ echo "Los indices son: ${!val[@]}"
 unset val
 
 #Declarar los arrays
-a
+v1=(34 52 34 23 6543 23434 323)
+vi[0] = 23423
+vi[1] = 6324
+vi[2] = 234
+vi[1000] = 23423
+echo "Los indices son:${!v2[@]}"
+
+declare -a v3
+
+#ARRAYS ASOCIATIVOS
+
+declare -A animal
+animal["perro"]="guau guau"
+animal[gato]="miauuu"
+animal[gallo]="kikirikiiiiiiii"
+animal[vaca]="muuuuuuuuu"
+
+-read -=p "Dime un animal": anim
+echo "Elegiste $anim y su sonido  es ${animal[$anim]}"
