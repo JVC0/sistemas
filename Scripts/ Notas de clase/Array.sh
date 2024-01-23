@@ -1,64 +1,58 @@
  #!/bin/bash
 
- regalo = ("caletine" "corbatas" "accesorios" "prismaticos" "camiseta de futbol")
- numeros=(2 432 6435 234 53)
+ #             0           1           2           3            4             5
+regalos=("calcetines" "corbatas" "accesorios" "pulsera" "prismáticos" "camiseta de fútbol")
+numeros=(2 432 6435 234 63455 3244 435 -6435 3244)
 
-echo "Este ano me he portado muy bien y me han regalado: ${regalos[1]}"
+echo "A ver si es verdad: ${regalos[@]:1:3}"
+echo "Este año me he portado muy bien y me han regalado: ${regalos[1]}"
 
-echo "Este ano me he portado muy bien y me han regalado: ${regalos[*]}"
-echo "Este ano me he portado muy bien y me han regalado: ${regalos[@]}"
+echo "Este año me he portado muy bien y me han regalado: ${regalos[*]}"
+echo "Este año me he portado muy bien y me han regalado: ${regalos[@]}"
 
 echo "Mis regalos han sido: "
-for reg in "${regalos[@]}" # vacio es un error
+for reg in "${regalos[@]}"
 do
-    echo " - $reg "
+	echo " - $reg"
 done
 
-#Numeros de elementos del array -> ${#regalos[@]}
-echo  "Como me he poertado tan  bien me han traido ${#regalos[@]} regalos"
-echo "Y los indices son ${!regalos[@]}"
+# Número de elementos del array ->  ${#array[@]}
+echo "Como me he portado tan bien, me han traído ${#regalos[@]} regalos"
+echo "Y los índices son ${!regalos[@]}"
 
-#Manipular Arrays!!
+# MANIPULAR ARRAYS!!!
 
-#Insertar elementos por el final
-regalos+=("unas pantuflas")
-regalos=( ${regalos[@]} "una camara")
+# Insertar elementos por el final
+regalos+=("pantuflas")
+regalos=("${regalos[@]}" "camiseta")
 
-#Insertar elemntos al principio
-regalos=("una camara" ${regalos[@]})
-regalos=("una camara" ${regalos[@]}"abrigo")
+# Insertar elementos al principio
+regalos=("cámara" ${regalos[@]})
 
-#coger varios elementos
 
-echo "a ver si es verdad: ${regalos[@]:1:3}"
+regalos=("pantalones" ${regalos[@]} "abrigo")
 
-#insertar elemento en la posicion 2
+# Insertar elemento en la posición 2
 regalos=(${regalos[@]::2} "sombrero" ${regalos[@]:2})
 
-# echo "${@:1:5}"
-#BORRAR
-val=(234 6345 234 234 63546)
-unset val[2]
-echo "Los indices son: ${!val[@]}"
-unset val
+#   echo "${@:1:5}"
 
-#Declarar los arrays
-v1=(34 52 34 23 6543 23434 323)
-vi[0] = 23423
-vi[1] = 6324
-vi[2] = 234
-vi[1000] = 23423
-echo "Los indices son:${!v2[@]}"
+# BORRAR
+
+echo "------------------"
+val=(234 6345 234 234 63546 3423 4234 12312)
+unset val[2]
+echo "Los índices son: ${!val[@]}"
+unset val 
+
+# DECLARAR LOS ARRAYS
+
+v1=(34 52 34 23 6543 23432 323)
+
+v2[0]=23423
+v2[1]=6324
+v2[2]=234
+v2[1000]=23423
+echo "Los índices son: ${!v2[@]}"
 
 declare -a v3
-
-#ARRAYS ASOCIATIVOS
-
-declare -A animal
-animal["perro"]="guau guau"
-animal[gato]="miauuu"
-animal[gallo]="kikirikiiiiiiii"
-animal[vaca]="muuuuuuuuu"
-
--read -=p "Dime un animal": anim
-echo "Elegiste $anim y su sonido  es ${animal[$anim]}"

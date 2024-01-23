@@ -12,19 +12,64 @@
 #   2023-12-19: version 1
 ######################################################
 
-read -p "Indique su peso en Kg: " peso
+elem=$1
 
+# 3 formas de comprobar que una variable no esté vacía
+#if [ "$elem" = "" ]
+#if [ -z "$elem" ]
+if [ ! -n "$elem" ]
+then
+	echo "ERROR: Debe indicar un elemento"
+	read -p "Indique el elemento: " elem
+fi
 
+if [ -e "$elem" ]
+then
+	echo "'$elem' EXISTE"
+else
+	echo "Lo siento, '$elem' NO existe"
+	exit
+fi
 
+# Compruebo el tipo de elemento
+if [ -f "$elem" ]
+then
+	echo "'$elem' es un FICHERO"
+elif [ -d "$elem" ]
+then
+	echo "'$elem' es un DIRECTORIO"
+elif [ -h "$elem" ]
+then
+	echo "'$elem' es un ENLACE"
+else
+	echo "'$elem es OTRO ELEMENTO"
+fi
 
+# Compruebo si está vacío o no
+if [ -s "$elem" ]
+then
+	echo "'$elem' NO es vacío"
+else
+	echo "'$elem' es VACÍO"
+fi
 
+# Comprobar PERMISOS
 
-
-
-9) Crear un script llamado ej09-info_ruta.sh para mostrar información de los ficheros, directorios, etc. Recibe un argumento y se debe indicar la siguiente información:
-
-Si se ha indicado un argumento o no (si no se ha indicado, se muestra mensaje de error y se aborta).
-Si el argumento indicado existe o no en el disco (si no existe, se muestra mensaje de error y se aborta).
-Si existe, si es un fichero, directorio, enlace simbólico o "tipo especial".
-Si tiene o no cada uno de los permisos (lectura, escritura y/o ejecución).
-Si está vacío o no.
+if [ -r "$elem" ]
+then
+	echo "'$elem' tiene permisos de LECTURA"
+else
+	echo "'$elem' NO tiene permisos de LECTURA"
+fi
+if [ -w "$elem" ]
+then
+	echo "'$elem' tiene permisos de ESCRITURA"
+else
+	echo "'$elem' NO tiene permisos de ESCRITURA"
+fi
+if [ -x "$elem" ]
+then
+	echo "'$elem' tiene permisos de EJECUCIÓN/ACCESO"
+else
+	echo "'$elem' NO tiene permisos de EJECUCIÓN/ACCESO"
+fi
