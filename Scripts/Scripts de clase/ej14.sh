@@ -1,5 +1,16 @@
 #!/bin/bash
-
+#####################################################
+#
+# Nombre: ej14.sh
+# Autor: Joseph Vanegas <josephvanegas48@Gmail.com
+#
+# Objetivo Calcular el numero al quadrado
+# Entrada: Dos numeros
+# Salida: EL cuadrado del el numero
+#
+# Historial:
+#   2023-01-22: version 1
+######################################################
 numero1=$1
 numero2=$2
   
