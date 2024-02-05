@@ -1,1 +1,1 @@
-dpks -s
+dpkg -s 
