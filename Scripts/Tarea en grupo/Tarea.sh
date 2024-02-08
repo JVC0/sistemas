@@ -1,4 +1,16 @@
 #!/bin/bash
+##############################################################################
+# Nombre: Tarea.sh
+# Autores: José Manuel Peña Rodríguez y Joseph Vanegas Caicedo
+#
+# Objetivo: Manipulación de paquetes e instalación de los mismos 
+#
+# Entradas: Nombre de Paquete
+# Salidas: Resultado de la opción seleccionada
+#
+# Historial:
+#   2023-02-08: version 1
+#############################################################################
 nombre_de_paquete=$1
 respuesta=""
 if [[ -z $nombre_de_paquete ]]; then
