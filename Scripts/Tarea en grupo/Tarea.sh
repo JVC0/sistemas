@@ -1,16 +1,14 @@
 #!/bin/bash
 nombre_de_paquete=$1
-repuesta=""
-if [[ -z $nombre_de_paquete ]]
-then
-    read -p "Introduzca nombre del paquete que desea instalar: " nombre_de_paquete
+respuesta=""
+if [[ -z $nombre_de_paquete ]]; then
+    read -p "Introduzca el nombre del paquete que desea instalar: " nombre_de_paquete
 fi
 
 sudo apt update
 listado=$(apt list --installed "$nombre_de_paquete" | grep -i instalado | wc -l)
 
-if apt-cache show $nombre_de_paquete >/dev/null 2>&1
-then
+if apt-cache show $nombre_de_paquete >/dev/null 2>&1; then
     if [ $listado -eq 0 ]; then
         read -p "Parece que no tienes este paquete. ¿Quieres instalarlo? " respuesta
         if [[ $respuesta == "si" ]]; then
@@ -37,6 +35,7 @@ then
             e|E|5) sudo apt purge $nombre_de_paquete ;;
             *) echo "ERROR: \"$opcion\" no es una opción correcta" ;;
         esac
+    fi
 else
     apt search $nombre_de_paquete
 fi
