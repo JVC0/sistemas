@@ -18,18 +18,18 @@ if [[ -z $nombre_de_paquete ]]; then
 fi
 
 sudo apt update
-listado=$(apt list --installed "$nombre_de_paquete" | grep -i instalado | wc -l)
+listado=$(dpkg -l $nombre_de_paquete | grep "^ii" | wc -l)
 
 if apt-cache show $nombre_de_paquete >/dev/null 2>&1; then
     if [ $listado -eq 0 ]; then
-        read -p "Parece que no tienes este paquete. ¿Quieres instalarlo? " respuesta
+        read -p "Parece que no tienes este paquete. ¿Quieres instalarlo (si/no)? " respuesta
         if [[ $respuesta == "si" ]]; then
             sudo apt install $nombre_de_paquete
         fi
     else
-        echo                    "┌────────────────┐"
-        echo                    "|    M E N U     │"
-        echo                    "└────────────────┘"
+        echo "                   ┌────────────────┐"
+        echo "                   │    M E N U     │"
+        echo "                   └────────────────┘"
         echo "┌───────────────────────────────────────────────────────────┐"
         echo "a: Mostrar su versión"
         echo "b: Reinstalarlo"
@@ -40,7 +40,7 @@ if apt-cache show $nombre_de_paquete >/dev/null 2>&1; then
         echo "└───────────────────────────────────────────────────────────┘"
         read -p "Introduzco su opción: " opcion
         case "$opcion" in
-            a|A|1) apt policy $nombre_de_paquete ;;
+            a|A|1) dpkg -s $nombre_de_paquete ;;
             b|B|2) sudo apt reinstall $nombre_de_paquete ;;
             c|C|3) sudo apt install $nombre_de_paquete ;;
             d|D|4) sudo apt remove $nombre_de_paquete ;;
