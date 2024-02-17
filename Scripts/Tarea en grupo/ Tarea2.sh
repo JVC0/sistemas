@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 ###########################################
 #
 # Autores: 
@@ -23,8 +24,7 @@ maxMem=$2
 # si no son 2 argumentos, salta mensaje de error y sale
 
 if [ "$#" -ne 2 ]; then
-    echo "Debe escribir dos argumentos, el primer porcentaje máximo de uso de CPU,
-					y el segundo es el porcentaje máximo de uso de memoria."
+    echo "Debe escribir dos argumentos, el primer porcentaje máximo de uso de CPU, y el segundo es el porcentaje máximo de uso de memoria."
     exit 100
 fi
 
@@ -36,9 +36,8 @@ if [ "$maxCPU" -lt 0 ] || [ "$maxMem" -lt 0 ]; then
 fi
 
 # si el num de memoria max es superior a 100, salta mensaje de error y sale
-#maxMem debe ser menor o igual que 100 (si no es así, informar del error y devolver error: 150)
-#Creo que esto es -le
-if [ "$maxMem" -le 100 ]; then
+
+if [ "$maxMem" -gt 100 ]; then
     echo "La memoria máxima debe ser menor o igual que 100."
     exit 150
 fi
@@ -53,21 +52,20 @@ function mostrarMenu () {
     echo "CUIDADO!!! Se está utilizando $porcentaje % de $tipo_proceso, que es un uso mayor de $tipo_proceso del permitido. "
 		
 # si es la cpu, entonces recolecta info del proceso
-    if [ "$tipo_proceso" == "CPU" ]; then
-        proceso_info=$(htop -n 1 -b -o %CPU | tail -n +8 | head -n 2)
+    if [ "$tipo_proceso" == "%CPU" ]; then
+        proceso_info=$(ps -eo pid,cmd,%cpu --sort=-%cpu | awk 'NR==2')
 # si es la memoria, entonces recolecta info del proceso
-    elif [ "$tipo_proceso" == "mem" ]; then
-        proceso_info=$(htop -n 1 -b -o %MEM | tail -n +8 | head -n 2)
+    elif [ "$tipo_proceso" == "%mem" ]; then
+        proceso_info=$(ps -eo pid,cmd,%mem --sort=-%mem | awk 'NR==2')
     fi
 # muestra info del proceso
-
     echo "Información sobre ese proceso:"
     echo "$proceso_info"
 
     # MENÚ
-    echo "                *********************"
-    echo "                *******Menú**********"
-    echo "                *********************"
+    echo "                ┌────────────────┐"
+    echo "                │      Menú      │"
+    echo "                └────────────────┘"
     echo ""
     echo "┌───────────────────────────────────────────────────────────┐"
     echo ""
@@ -85,21 +83,21 @@ function mostrarMenu () {
     while true; do #empieza el bucle de mientras proceso sea superior:
 
 # busca el pid del proceso
-        pid=$(pidof htop)
+        pid=$(ps -eo pid --sort=-%cpu | awk 'NR==2')
 
-        read -p "Elija la opción que desee: " opcion
+        read -r  -p "Elija la opción que desee: " opcion
 
 # código para ejecutar opciones del menú
 
         case $opcion in
             1) echo "Se ignora el proceso";;
-            2) renice -n -3 -p "$pid";;
+            2) sudo renice -n -3 -p "$pid";;
             3) kill -s SIGINT "$pid";;
             4) kill -s SIGTERM "$pid";;
             5) kill -s SIGKILL "$pid";;
             6) kill -s SIGSTOP "$pid";;
             7) kill -s SIGTSTP "$pid";;
-            8) echo "Saliendo del menú"; break;;
+            8) echo "Saliendo del menú"; exit;;
             *) echo "No es una opción válida";;
         esac
     done
@@ -128,14 +126,11 @@ trap 'mostrarLimitesProcesos' SIGUSR2
 # bucle que comprueba si se supera los límites
 
 while true; do
-    maxCPU_proceso=$(htop -n 1 -b | grep "^%CPU" | awk '{print $2}')
-    maxCPU_proceso=${maxCPU_proceso%.*}
+    maxCPU_proceso=$(ps -eo %cpu --sort=-%cpu | awk 'NR==2{print $1}')
+    maxMem_proceso=$(ps -eo %mem --sort=-%mem | awk 'NR==2{print $1}')
    
-    maxMem_proceso=$(htop -n 1 -b | grep "^%Mem" | awk '{print $2}')
-    maxMem_proceso=${maxMem_proceso%.*}
-   
-    if [ "$maxCPU_proceso" -gt "$maxCPU" ] || [ "$maxMem_proceso" -gt "$maxMem" ]; then
-        mostrarMenu "%CPU" "$maxCPU_proceso"
+    if (( $(echo "$maxCPU_proceso > $maxCPU" | bc -l) )) || (( $(echo "$maxMem_proceso > $maxMem" | bc -l) )); then
+    mostrarMenu "%CPU" "$maxCPU_proceso"
     fi
 
     sleep 30
