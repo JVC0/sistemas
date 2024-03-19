@@ -1697,10 +1697,7 @@ Esto solicitará la contraseña sin mostrarla mientras se escribe.
 net user nombreusuario
 ```
 
-10. ¿A qué grupo(s) local(es) pertenecen los usuarios creados?
-```cmd
 
-```
 
 11. Crea un grupo local llamado Informática. Añade los tres usuarios anteriores a ese grupo y muestra la lista de usuarios del grupo para ver que así es.
 ```cmd
@@ -1710,57 +1707,3 @@ net localgroup Informática test02 /add
 net localgroup Informática test03 /add
 ```
 
-12. Haz que test03 sea administrador.
-```cmd
-
-```
-
-13. Haz que la cuenta de test01 caduque al final de 2023 y que tenga que cambiar la contraseña la próxima vez que inicie sesión.
-```cmd
-
-```
-
-14. Desactiva al usuario test02.
-```cmd
-
-```
-
-15. Haz que el usuario test03 NO pueda cambiar su contraseña, y que esta NO sea obligatoria.
-```cmd
-
-```
-
-16. Prueba a iniciar de nuevo sesión con cada usuario... ¿qué sucede?
-```cmd
-
-```
-
-17. Indica el nombre completo del usuario test01 (invéntate uno) y añade comentarios a su cuenta.
-```cmd
-
-```
-
-18. Elimina al usuario test03 del grupo local de "Informática".
-```cmd
-
-```
-
-19. Muestra la configuración global de las cuentas (longitud mínima de las contraseñas, duración, bloqueos, etc.).
-```cmd
-
-```
-
-20. Modifica la configuración global para que todas las contraseñas tengan uan longitud mínima de 6 caracteres, se tengan que cambiar cada mes y no se puedan usar las últimas 3 contraseñas. 
-```cmd
-
-```
-
-21. Elimina el grupo local de "Informática". Muestra todos los grupos locales para asegurate de que está eliminado.
-```cmd
-
-```
-
-22. Elimina todos los usuarios creados en estos ejercicios. Muestra todos los usuarios locales para asegurarte de que han sido eliminados.
-```cmd
-
-```
